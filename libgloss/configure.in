@@ -163,7 +163,7 @@ case "${target}" in
   iq2000-*-*)
 	AC_CONFIG_SUBDIRS([iq2000])
 	;;
-  or1k-*-* | or1knd-*-* )
+  or1k-*-elf | or1knd-*-elf )
 	AC_CONFIG_SUBDIRS([or1k])
 	;;
 esac
