@@ -47,7 +47,7 @@ git clone git@github.com:optimsoc/gzll-newlib.git newlib
 <p>Build and install binutils:</p>
 
 <pre><code>mkdir build-binutils; cd build-binutils
-../binutils/configure --target=or1k-elf --prefix=$PREFIX --enable-shared --disable-itcl --disable-tk --disable-tcl --disable-winsup --disable-gdbtk --disable-libgui --disable-rda --disable-sid --disable-sim --disable-gdb --with-sysroot --disable-newlib --disable-libgloss
+../binutils/configure --target=or1k-gzll --prefix=$PREFIX --enable-shared --disable-itcl --disable-tk --disable-tcl --disable-winsup --disable-gdbtk --disable-libgui --disable-rda --disable-sid --disable-sim --disable-gdb --with-sysroot --disable-newlib --disable-libgloss
 make
 make install
 </code></pre>
@@ -55,7 +55,7 @@ make install
 <p>Build and install basic gcc:</p>
 
 <pre><code>mkdir build-gcc-stage1; cd build-gcc-stage1
-../gcc/configure --target=or1k-elf --prefix=$PREFIX --enable-languages=c --disable-shared --disable-libssp
+../gcc/configure --target=or1k-gzll --prefix=$PREFIX --enable-languages=c --disable-shared --disable-libssp
 make
 make install
 </code></pre>
@@ -63,7 +63,7 @@ make install
 <p>Build and install newlib:</p>
 
 <pre><code>mkdir build-newlib; cd build-newlib
-../newlib/configure --target=or1k-elf --prefix=$PREFIX
+../newlib/configure --target=or1k-gzll --prefix=$PREFIX
 make
 make install
 </code></pre>
@@ -71,7 +71,7 @@ make install
 <p>Build and install gcc:</p>
 
 <pre><code>mkdir build-gcc-stage2; cd build-gcc-stage2
-../gcc/configure --target=or1k-elf --prefix=$PREFIX --enable-languages=c,c++ --disable-shared --disable-libssp --with-newlib
+../gcc/configure --target=or1k-gzll --prefix=$PREFIX --enable-languages=c,c++ --disable-shared --disable-libssp --with-newlib
 make
 make install
 </code></pre>
