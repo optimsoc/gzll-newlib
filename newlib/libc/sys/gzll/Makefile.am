@@ -8,7 +8,10 @@ AM_CCASFLAGS = $(INCLUDES)
 
 noinst_LIBRARIES = lib.a
 
-lib_a_SOURCES = sbrk.c
+lib_a_SOURCES = sbrk.c \
+	outbyte.S \
+	syscalls.c
+
 lib_a_CCASFLAGS = $(AM_CCASFLAGS)
 lib_a_CFLAGS = $(AM_CFLAGS)
 
