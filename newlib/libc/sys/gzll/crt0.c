@@ -1,7 +1,15 @@
 
 extern void main();
+extern void exit();
+
+extern int *__bss_start;
+extern int *_end;
 
 void _start() {
-	main();
-	__asm__("l.ori r11, r0, 0x0; l.sys 0" : : : "memory");
+    char *i;
+    for (i = __bss_start; i < _end; i++) {
+        *i = 0;
+    }
+    main();
+    exit();
 }
