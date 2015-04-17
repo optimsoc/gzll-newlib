@@ -44,6 +44,8 @@ _write_r(struct _reent * reent, int fd, const void *buf, size_t nbytes)
 void
 _exit(int rc)
 {
+	// Perform an exit syscall
+	__asm__("l.ori r11, r0, 0x0; l.sys 0" : : : "memory");
 	while (1) {}
 }
 
