@@ -18,16 +18,18 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#include <reent.h>
+
 static uint32_t gzll_heap_end;
 
 void *
-_sbrk (ptrdiff_t incr)
+_sbrk_r (struct _reent *reent, ptrdiff_t incr)
 {
 	extern uint32_t	end; /* Set by linker.  */
 	uint32_t prev_heap_end;
 
 	if (gzll_heap_end == 0) {
-		gzll_heap_end = end;
+		gzll_heap_end = &end;
 	}
 
 	prev_heap_end = gzll_heap_end;
