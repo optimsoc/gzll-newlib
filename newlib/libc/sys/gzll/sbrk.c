@@ -21,6 +21,20 @@
 #include <reent.h>
 
 static uint32_t gzll_heap_end;
+static uint32_t alloc_end;
+
+static inline uint32_t syscall(uint32_t id, uint32_t p0, uint32_t p1)
+{
+	register uint32_t r11 __asm__("r11") = id;
+	register uint32_t r3 __asm__("r3") = p0;
+	register uint32_t r4 __asm__("r4") = p1;
+
+	__asm__ __volatile__ ("l.sys 0" : "=r"(r11) : "r"(r11), "r"(r3),
+			      "r"(r4) : "memory");
+
+	return r11;
+}
+
 
 void *
 _sbrk_r (struct _reent *reent, ptrdiff_t incr)
@@ -30,11 +44,15 @@ _sbrk_r (struct _reent *reent, ptrdiff_t incr)
 
 	if (gzll_heap_end == 0) {
 		gzll_heap_end = &end;
+		alloc_end = (gzll_heap_end & ~0x1fff) + 0x2000;
 	}
 
 	prev_heap_end = gzll_heap_end;
 	gzll_heap_end += incr;
 
+	if(gzll_heap_end > alloc_end) {
+	    alloc_end = syscall(1, alloc_end, gzll_heap_end - alloc_end);
+	}
 
 	return (void*) prev_heap_end;
 }
